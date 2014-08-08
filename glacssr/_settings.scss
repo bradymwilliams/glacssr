@@ -1,0 +1,12 @@
+$font-size: 16 !default;
+$max-width: 1140px;
+
+$responsive: true !default;
+$float-fallback: true !default;
+$gutter-width: 20px !default;
+
+$desktop: 'screen and (min-width: #{$max-width})' !default;
+$tlg: 'screen and (min-width: 960px)' !default;
+$tsm: 'screen and (min-width: 768px)' !default;
+$mlg: 'screen and (min-width: 640px)' !default;
+$msm: 'screen and (min-width: 420px)' !default;

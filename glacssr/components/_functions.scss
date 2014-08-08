@@ -1,0 +1,8 @@
+@function em($pxval, $base: $font-size) {
+  @return ($pxval / $base) * 1em;
+}
+
+@function rem($pxval) {
+  $base: $font-size;
+  @return ($pxval / $base) * 1rem;
+}

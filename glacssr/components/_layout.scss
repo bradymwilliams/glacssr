@@ -1,0 +1,168 @@
+/**
+ * Everything necessary for responsive
+ */
+@mixin layout($cols, $gutter: #{$gutter-width}, $justify: center, $align: stretch, $respond: #{$responsive}, $grid: false) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: wrap;
+
+  > * {
+    padding-left: calc(#{$gutter} / 2);
+    padding-right: calc(#{$gutter} / 2);
+    flex-grow: 1;
+    flex-basis: 100%;
+
+    // Add even spacing to top and bottom of each "row"..
+    @if($grid){
+      padding-top: calc(#{$gutter} / 2);
+      padding-bottom: calc(#{$gutter} / 2);
+    }
+    
+    @if($respond){
+
+      @if($cols == 2){
+        @media #{$mlg}{
+          flex-basis: 50%;
+        }
+      }
+
+      @if($cols == 3){
+        @media #{$mlg}{
+          flex-basis: 33.3%;
+        }
+      }
+
+      @if($cols == 4){
+        @media #{$mlg}{
+          flex-basis: 50%;
+        }
+
+        @media #{$tlg}{
+          flex-basis: 25%;
+        }
+      }
+
+      @if($cols == 5){
+        @media #{$tsm}{
+          flex-basis: 33.3%;
+        }
+
+        @media #{$tlg}{
+          flex-basis: 20%;
+        }
+      }
+
+      @if($cols == 6){
+        @media #{$mlg}{
+          flex-basis: 50%;
+        }
+
+        @media #{$tlg}{
+          flex-basis: 33.3%;
+        }
+
+        @media #{$desktop}{
+          flex-basis: 16.6%;
+        }
+      }
+
+      @if($cols == 8){
+        @media #{$mlg}{
+          flex-basis: 50%;
+        }
+
+        @media #{$tlg}{
+          flex-basis: 25%;
+        }
+
+        @media #{$desktop}{
+          flex-basis: 12.5%;
+        }
+      }
+    }
+  }
+
+  @if($float-fallback){
+    .no-flexbox & {
+      @include floatFallback($cols, $gutter, $respond);
+    }
+  }
+}
+
+@mixin floatFallback($cols, $gutter, $respond) {
+  @include clear;
+  display: block;
+
+  > * {
+    padding-left: #{$gutter} / 2;
+    padding-right: #{$gutter} / 2;
+    width: calc(100% / #{$cols});
+    width: 100%;
+
+    @if($respond){
+      @if($cols == 2){
+        @media #{$mlg}{
+          float: left;
+          width: calc(100% / 2);
+        }
+      }
+
+      @if($cols == 3){
+        @media #{$mlg}{
+          float: left;
+          width: calc(100% / 3);
+        }
+      }
+
+      @if($cols == 4){
+        @media #{$mlg}{
+          float: left;
+          width: calc(100% / 2);
+        }
+
+        @media #{$tlg}{
+          width: calc(100% / 4);
+        }
+      }
+
+      @if($cols == 5){
+        @media #{$tsm}{
+          width: calc(100% / 3);
+        }
+
+        @media #{$tlg}{
+          width: calc(100% / 5);
+        }
+      }
+
+      @if($cols == 6){
+        @media #{$mlg}{
+          width: calc(100% / 2);
+        }
+
+        @media #{$tlg}{
+          width: calc(100% / 3);
+        }
+
+        @media #{$desktop}{
+          width: calc(100% / 6);
+        }
+      }
+
+      @if($cols == 8){
+        @media #{$mlg}{
+          width: calc(100% / 2);
+        }
+
+        @media #{$tlg}{
+          width: calc(100% / 4);
+        }
+
+        @media #{$desktop}{
+          width: calc(100% / 8);
+        }
+      }
+    }
+  }
+}
